@@ -1,15 +1,15 @@
 package com.example.tinkpad.scorecounting;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 public class Score extends AppCompatActivity implements View.OnClickListener {
     TextView sco;
     TextView sco2;
+    private final String TAG = "second";
 
 
 
@@ -19,8 +19,64 @@ public class Score extends AppCompatActivity implements View.OnClickListener {
         setContentView(R.layout.activity_score);
         sco=findViewById(R.id.score);
         sco2=findViewById(R.id.score2);
+        Log.i(TAG, "onCreate: ");
 
 
+    }
+
+    protected void onStart() {
+        super.onStart();
+        Log.i(TAG, "onStart: ");
+    }
+
+    protected void onResume() {
+        super.onResume();
+        Log.i(TAG, "onResume: ");
+    }
+
+    @Override
+    //保留原始数据
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        String scorea = ((TextView) findViewById(R.id.score)).getText().toString();
+        String scoreb = ((TextView) findViewById(R.id.score2)).getText().toString();
+        Log.i(TAG, "onSaveInstanceState: ");
+
+        outState.putString("teama_score", scorea);
+        outState.putString("teamb_score", scoreb);
+
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        String scorea = savedInstanceState.getString("teama_score");
+        String scoreb = savedInstanceState.getString("teamb_score");
+        Log.i(TAG, "onRestoreInstanceState: ");
+
+        ((TextView) findViewById(R.id.score)).setText(scorea);
+        ((TextView) findViewById(R.id.score2)).setText(scoreb);
+
+    }
+
+    protected void onRestart() {
+        super.onRestart();
+        Log.i(TAG, "onRestart: ");
+    }
+
+    protected void onPause() {
+        super.onPause();
+        Log.i(TAG, "onPause: ");
+    }
+
+    protected void onStop() {
+        super.onStop();
+        Log.i(TAG, "onStop: ");
+    }
+
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.i(TAG, "onDestroy: ");
     }
 
 
